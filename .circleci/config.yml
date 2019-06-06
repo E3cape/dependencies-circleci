@@ -26,16 +26,18 @@ jobs:
             echo $TESTVAR
       - run: echo $TESTVAR
       - run: echo $MYNEWVAR
-
+      - persist_to_workspace:
+          root: /
             
   test:
-    docker:
-      - image: circleci/ruby:2.4.1
     steps:
+      - attach_workspace:
+        at: /
       - checkout
       - run: echo "Second parallel job"
       - run: echo $ENVVAR
       - run: echo $ENVVARTWO
+      - run: echo $MYNEWVAR
       
       
 workflows:
