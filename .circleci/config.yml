@@ -20,11 +20,12 @@ jobs:
             echo "RUNNING JOB: ${CIRCLE_JOB}"
             echo "JOB PARALLELISM: ${CIRCLE_NODE_TOTAL}"
             echo "CIRCLE_REPOSITORY_URL: ${CIRCLE_REPOSITORY_URL}"
-            echo 'export MYNEWVAR="huita"' >> $BASH_ENV
+            echo 'export MYNEWVAR="Value of new var in bash_env"' >> $BASH_ENV
             source $BASH_ENV
             echo $MYNEWVAR
             echo $TESTVAR
       - run: echo $TESTVAR
+      - run: echo $MYNEWVAR
 
             
   test:
@@ -44,3 +45,5 @@ workflows:
       - build
       - test:
           context: first-content
+          requires:
+            - build
