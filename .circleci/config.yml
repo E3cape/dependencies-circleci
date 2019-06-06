@@ -23,13 +23,13 @@ jobs:
             echo "JOB PARALLELISM: ${CIRCLE_NODE_TOTAL}"
             echo "CIRCLE_REPOSITORY_URL: ${CIRCLE_REPOSITORY_URL}"
   test:
-    context: first-content
     docker:
       - image: circleci/ruby:2.4.1
     steps:
       - checkout
       - run: echo "Second parallel job"
       - run: echo $ENVVAR
+      - run: echo $ENVVARTWO
       
       
 workflows:
@@ -37,4 +37,5 @@ workflows:
   "Context test":
     jobs:
       - build
-      - test
+      - test:
+          context: first-content
