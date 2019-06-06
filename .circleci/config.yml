@@ -7,14 +7,11 @@ jobs:
       - image: circleci/ruby:2.4.1
     steps:
       - checkout
-      - run: echo "First parallel job"
-      - run: echo ${CIRCLE_BRANCH}
-      - run: echo $CIRCLE_BRANCH
-      - run: echo $FIRSTVARIABLE
-      - run: $SECONDVARIABLE
-      - run: $THIRDVARIABLE
+      - run: echo "First job"
       - run: 
           name: "Variables"
+          environment:
+            TESTVAR: valueoftestvar
           command: |
             echo "TRIGGERER: ${CIRCLE_USERNAME}"
             echo "BUILD_NUMBER: ${CIRCLE_BUILD_NUM}"
@@ -24,7 +21,12 @@ jobs:
             echo "JOB PARALLELISM: ${CIRCLE_NODE_TOTAL}"
             echo "CIRCLE_REPOSITORY_URL: ${CIRCLE_REPOSITORY_URL}"
             echo 'export MYNEWVAR="huita"' >> $BASH_ENV
+            source $BASH_ENV
             echo $MYNEWVAR
+            echo $TESTVAR
+      - run: echo $TESTVAR
+
+            
   test:
     docker:
       - image: circleci/ruby:2.4.1
