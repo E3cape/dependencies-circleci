@@ -14,7 +14,7 @@ jobs:
       - run: $SECONDVARIABLE
       - run: $THIRDVARIABLE
       - run: 
-          command: |-
+          command: |
             echo "TRIGGERER: ${CIRCLE_USERNAME}"
             echo "BUILD_NUMBER: ${CIRCLE_BUILD_NUM}"
             echo "BUILD_URL: ${CIRCLE_BUILD_URL}"
